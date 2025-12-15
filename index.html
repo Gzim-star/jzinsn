@@ -7,15 +7,6 @@
 <!-- Pixel Font -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-<!-- 🔒 Game Info -->
-<script>
-// 🔒 Brain-Test Game
-// 👤 Creator: Gëzim Hasani
-// 🆔 Game ID: 2025-GH-BC01
-// 📦 Version: 1.0.0
-// 📅 Created: 14.12.2025
-</script>
-
 <style>
 html, body {
   height: 100%;
@@ -104,7 +95,7 @@ button:hover {
 <body>
 
 <div id="gameContainer">
-  <h1>🧮</h1>
+  <h1>Math Challenge 🧮</h1>
 
   <div id="task">Loading...</div>
 
@@ -118,6 +109,11 @@ button:hover {
 </div>
 
 <script>
+// 🔒 Brain-Test Game Original by Gëzim Hasani
+const gameID = "2025-GH-BC01";
+const gameVersion = "1.0.0";
+const creationDate = "2025-12-14";
+
 let correctAnswer = 0;
 let score = 0;
 
@@ -130,6 +126,7 @@ function generateTask() {
   let a, b, c, text;
 
   if (pattern === 1) {
+    // (a × b) − c
     a = randomInt(6, 20);
     b = randomInt(4, 15);
     c = randomInt(5, 40);
@@ -138,6 +135,7 @@ function generateTask() {
   }
 
   if (pattern === 2) {
+    // (a + b) × c
     a = randomInt(10, 40);
     b = randomInt(5, 30);
     c = randomInt(2, 8);
@@ -146,11 +144,11 @@ function generateTask() {
   }
 
   if (pattern === 3) {
+    // (a − b) ÷ c
     c = randomInt(2, 6);
     correctAnswer = randomInt(5, 20);
     b = randomInt(5, 30);
     a = (correctAnswer * c) + b;
-    correctAnswer = (a - b) / c;
     text = `(${a} − ${b}) ÷ ${c}`;
   }
 
@@ -169,48 +167,17 @@ function checkAnswer() {
     score++;
     message.textContent = "✅ Correct!";
     document.getElementById("score").textContent = `Score: ${score}`;
-    setTimeout(() => {
-      message.textContent = "";
-      generateTask();
-    }, 500);
   } else {
-    message.textContent = `❌ Wrong! Correct answer was ${correctAnswer}`;
-    document.getElementById("task").textContent = "Game Over 💥";
+    message.textContent = `❌ Wrong! Correct was ${correctAnswer}`;
   }
+
+  setTimeout(() => {
+    message.textContent = "";
+    generateTask();
+  }, 700);
 }
 
 generateTask();
-</script>
-
-<!-- 🔐 Hidden Signature Script -->
-<script>
-(function(){
-  const DEV = {
-    name: "Gëzim Hasani",
-    id: "2025-GH-BC01",
-    date: "14.12.2025",
-    mode: "Medium Math Challenge"
-  };
-
-  Object.freeze(DEV);
-
-  console.log(
-    "%c🔐 Original Game Loaded",
-    "color:#4dd0e1;font-weight:bold;font-size:14px"
-  );
-
-  window.addEventListener("keydown", e => {
-    if (e.ctrlKey && e.altKey && e.key.toLowerCase() === "g") {
-      alert(
-        "🔒 ORIGINAL GAME\n\n" +
-        "👤 Creator: " + DEV.name + "\n" +
-        "🆔 ID: " + DEV.id + "\n" +
-        "📅 Date: " + DEV.date + "\n" +
-        "🎮 Mode: " + DEV.mode
-      );
-    }
-  });
-})();
 </script>
 
 </body>
