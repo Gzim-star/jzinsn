@@ -6,19 +6,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<!-- Pixel Font -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
 html, body { height: 100%; margin: 0; }
 body {
   display: grid;
-  place-items: center;          /* immer exakt mittig */
+  place-items: center;
   background: #000000;
   color: white;
   font-family: Arial, sans-serif;
   text-align: center;
-  overflow-x: hidden;           /* kein seitliches Rutschen */
+  overflow-x: hidden;
 }
 
 #gameContainer {
@@ -28,7 +27,7 @@ body {
   background: #000000;
   border-radius: 15px;
   box-shadow: 0 0 25px rgba(255,255,255,0.08);
-  box-sizing: border-box;       /* stabil */
+  box-sizing: border-box;
 }
 
 h1 {
@@ -43,11 +42,11 @@ h1 {
   margin: 20px 0;
   min-height: 50px;
   font-family: 'Press Start 2P', cursive;
-  word-break: keep-all;         /* keine Hyphen */
+  word-break: keep-all;
 }
 
-#task .operator-minus {
-  color: white; /* Minus wird weiß */
+#task .minus {
+  color: white;
 }
 
 #inputContainer {
@@ -111,10 +110,6 @@ button:hover { background: #4caf50; }
 
 <script>
 // 🔒 Brain-Test Game Original by Gëzim Hasani
-const gameID = "2025-GH-BC01";
-const gameVersion = "1.0.0";
-const creationDate = "2025-12-14";
-
 let correctAnswer = 0;
 let score = 0;
 
@@ -122,9 +117,9 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Funktion um Minus farblich zu markieren
-function formatTask(text) {
-  return text.replace(/−/g, '<span class="operator-minus">−</span>');
+// Funktion, die Minuszeichen weiß macht
+function highlightMinus(text) {
+  return text.replace(/−|-/g, '<span class="minus">−</span>');
 }
 
 function generateTask() {
@@ -155,7 +150,7 @@ function generateTask() {
     text = `(${a} − ${b}) ÷ ${c}`;
   }
 
-  document.getElementById("task").innerHTML = formatTask(text) + " = ?";
+  document.getElementById("task").innerHTML = highlightMinus(text) + " = ?";
   document.getElementById("answer").value = "";
   document.getElementById("answer").focus();
 }
