@@ -124,8 +124,8 @@ tipButton.onclick = () => {
       <p>Word Chain Tips:</p>
     <ul>
       <li>Think of the last letter of...</li>
-      <li>No repetitions allowed!</li>
-      <li>Longer words are smarter.</li>
+      <li>Find the tipp.</li>
+      <li>Longer or smarter❗️</li>
     </ul>
   `;
 
@@ -193,6 +193,16 @@ function startWordChain(){
   "Quantum","Syntax","Recursion","Neural","Topology",
   "Cognition","Spectrum","Vector","Matrix","Anomaly",
   "Threshold","Resonance","Asymmetry","Continuum","Parable"];
+
+}
+  const forbidden = [
+  "dog","cat","rat","ant","cow","lion","tiger","bear",
+  "apple","tree","hat","egg","fish"
+];
+
+if(forbidden.includes(word.toLowerCase())){
+  message.textContent = "❌ Too basic";
+  return;
 }
 
 function playWord(){
@@ -202,7 +212,7 @@ function playWord(){
   if(!word) return;
   // Mindestlänge
 if(word.length < 6){
-  message.textContent = "❌ Too short";
+  message.textContent = "❌ Wrong";
   return;
 }
 
