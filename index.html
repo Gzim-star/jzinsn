@@ -201,17 +201,16 @@ function startWordChain(){
     transition: opacity 0.5s;
   "></div>
 `;
- function showWordChainHint(){
-  const hint = document.getElementById('wordHint');
-  if(!hint) return;
-
-  hint.textContent = "🧠 Nur die richtigen Wörter bringen dich weiter.";
+hint.textContent = "🧠 Nur die richtigen Wörter bringen dich weiter.";
   hint.style.opacity = "1";
 
   setTimeout(()=>{
     hint.style.opacity = "0";
   }, 3000);
 }
+  function showWordChainHint(){
+  const hint = document.getElementById('wordHint');
+  if(!hint) return; 
   currentWord='Apple'; usedWords=[currentWord];
   wordList=["Algorithm","Entropy","Hypothesis","Paradox","Labyrinth",
   "Quantum","Syntax","Recursion","Neural","Topology",
