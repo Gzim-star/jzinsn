@@ -643,7 +643,7 @@ function showChromaticMessage(){
   clearTimeout(uniformTimeout);
 
    // Startscreen wieder sichtbar
-  startScreen.style.display = 'flex';
+  startScreen.style.display = 'none';
 
   // GameContainer wieder verstecken, bis Nutzer klickt
   document.getElementById('gameContainer').style.display = 'none'; 
@@ -652,7 +652,7 @@ const startScreen = document.getElementById('startScreen');
 
 startScreen.onclick = () => {
   startScreen.style.display = 'none';
-  document.getElementById('gameContainer').style.display = 'flex';
+  document.getElementById('gameContainer').style.display = 'none';
 };
   // Variablen zurücksetzen
   stage = 'start';
