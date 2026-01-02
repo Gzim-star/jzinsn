@@ -105,26 +105,7 @@ button:hover { background: #00000000; }
 .modal.open {
   display: block;
 }
-  // ================== Passwort-Abfrage ==================
-  let accessGranted = false;
-
-  function askPassword() {
-    const pw = prompt("Enter password to start BrainTrials:");
-    if (pw === "1234") { // <-- hier dein Passwort
-      accessGranted = true;
-      document.getElementById('startScreen').style.display = 'flex';
-    } else {
-      alert("Wrong password! Try again.");
-      askPassword(); // erneut fragen
-    }
-  }
-
-  // Beim Laden der Seite: Flow-Bild verstecken & Passwort fragen
-  window.onload = () => {
-    const startScreen = document.getElementById('startScreen');
-    if(startScreen) startScreen.style.display = 'none'; // Flow-Bild erstmal verstecken
-    askPassword(); // Passwort-Abfrage starten
-  };
+  
   #startScreen {
   position: fixed;
   inset: 0;
@@ -310,7 +291,27 @@ function showWordError(text) {
     message.textContent = "";
   }, 1200);
 }
-// ========================== WORD CHAIN ==========================
+// ================== Passwort-Abfrage ==================
+  let accessGranted = false;
+
+  function askPassword() {
+    const pw = prompt("Enter password to start BrainTrials:");
+    if (pw === "1234") { // <-- hier dein Passwort
+      accessGranted = true;
+      document.getElementById('startScreen').style.display = 'flex';
+    } else {
+      alert("Wrong password! Try again.");
+      askPassword(); // erneut fragen
+    }
+  }
+
+  // Beim Laden der Seite: Flow-Bild verstecken & Passwort fragen
+  window.onload = () => {
+    const startScreen = document.getElementById('startScreen');
+    if(startScreen) startScreen.style.display = 'none'; // Flow-Bild erstmal verstecken
+    askPassword(); // Passwort-Abfrage starten
+  };
+    // ========================== WORD CHAIN ==========================
 function startWordChain(){
   stage='word';
   const container=document.getElementById('gameContainer');
