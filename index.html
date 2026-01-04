@@ -120,27 +120,39 @@ button:hover { background: #00000000; }
   height: auto;
   cursor: pointer;
 }
-    .spark {
-      position: fixed;
-      top: -20px;
-      right: -20px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.4);
-      pointer-events: none;
-      animation: fallSpark 4s linear forwards;
-      z-index: 5;
-    }
+.spark {
+  position: fixed;
+  top: -30px;
+  left: 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  text-shadow:
+    0 0 6px rgba(255,255,255,0.4),
+    0 0 12px rgba(180,220,255,0.25);
+  pointer-events: none;
+  animation:
+    sparkFall 12s linear forwards,
+    sparkPulse 3s ease-in-out infinite;
+}
 
-    @keyframes fallSpark {
-      from {
-        transform: translate(0, 0) rotate(0deg);
-        opacity: 1;
-      }
-      to {
-        transform: translate(-120vw, 120vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
+@keyframes sparkFall {
+  from {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  to {
+    transform: translate(-140px, 115vh);
+    opacity: 0;
+  }
+}
+
+@keyframes sparkPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.85; }
+}
 
 </style>
 </head>
@@ -736,26 +748,29 @@ function showChromaticWin(){
   }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
 }
 
+let activeSpark = null;
 
-   function createSpark() {
-      const spark = document.createElement("div");
-      spark.className = "spark";
-      spark.textContent = "✦";"⋆";
-"·";
-"✧";
-"˙";
+function createSingleSpark() {
+  if (activeSpark) return;
 
-      spark.style.fontSize = (8 + Math.random() * 8) + "px";
-      spark.style.animationDuration = (3 + Math.random() * 3) + "s";
+  const spark = document.createElement("div");
+  spark.className = "spark";
+  spark.textContent = "✦"; // magischer als ✧
 
-      document.body.appendChild(spark);
+  spark.style.left = (55 + Math.random() * 35) + "vw";
 
-      setTimeout(() => {
-        spark.remove();
-      }, 6000);
-    }
+  document.body.appendChild(spark);
+  activeSpark = spark;
 
-    setInterval(createSpark, 1500);
+  spark.addEventListener("animationend", () => {
+    spark.remove();
+    activeSpark = null;
+  });
+}
+
+// ✨ selten erscheinen lassen
+setInterval(createSingleSpark, 8000);
+
   </script>
 </body>
 </html>
