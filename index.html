@@ -79,6 +79,7 @@ body {
   transition: opacity 0.5s;
   z-index: 3002;
 "></div>
+  
 const hint = document.createElement('div');
 hint.textContent = "Welcome";
 hint.style.position = 'absolute';
@@ -90,6 +91,7 @@ hint.style.fontSize = '2em';
 hint.style.color = 'white';
 hint.style.opacity = '0';
 hint.style.transition = 'opacity 0.5s';
+ startScreen.appendChild(hint); 
   setTimeout(() => {
     hint.style.opacity = '1';
   }, 5000);
