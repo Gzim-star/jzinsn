@@ -120,6 +120,28 @@ button:hover { background: #00000000; }
   height: auto;
   cursor: pointer;
 }
+    .spark {
+      position: fixed;
+      top: -20px;
+      right: -20px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+      pointer-events: none;
+      animation: fallSpark 4s linear forwards;
+      z-index: 5;
+    }
+
+    @keyframes fallSpark {
+      from {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+      }
+      to {
+        transform: translate(-120vw, 120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
 </style>
 </head>
 <body>
@@ -714,7 +736,24 @@ function showChromaticWin(){
   }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
 }
 
-</script>
+
+   function createSpark() {
+      const spark = document.createElement("div");
+      spark.className = "spark";
+      spark.textContent = "✦";
+
+      spark.style.fontSize = (8 + Math.random() * 8) + "px";
+      spark.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+      document.body.appendChild(spark);
+
+      setTimeout(() => {
+        spark.remove();
+      }, 6000);
+    }
+
+    setInterval(createSpark, 1500);
+  </script>
 </body>
 </html>
 
