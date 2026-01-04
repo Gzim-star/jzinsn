@@ -121,19 +121,11 @@ button:hover { background: #00000000; }
   cursor: pointer;
 }
 
-#copyright {
-  position: relative; /* wichtig, damit flowLight sich relativ dazu positioniert */
-  display: inline-block;
-  color: white;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.8em;
-}
-
+/* ✨ Flow Light Effect */
 #flowLight {
   position: absolute;
-  top: 50%;        /* vertikal Mitte des ©️ */
-  left: 50%;       /* horizontal Mitte des ©️ */
-  transform: translate(-50%, -50%); /* exakte Zentrierung */
+  top: 40px;
+  right: 40px;
   width: 6px;
   height: 6px;
   background: ✨;
@@ -148,18 +140,18 @@ button:hover { background: #00000000; }
 
 @keyframes flowLightPulse {
   0% {
-    transform: translate(-50%, -50%) scale(0.3);
+    transform: scale(0.3);
     opacity: 0;
   }
   20% {
     opacity: 1;
   }
   60% {
-    transform: translate(-50%, -50%) scale(1.4);
+    transform: scale(1.4);
     opacity: 0.6;
   }
   100% {
-    transform: translate(-50%, -50%) scale(2);
+    transform: scale(2);
     opacity: 0;
   }
 }
@@ -168,7 +160,6 @@ button:hover { background: #00000000; }
 <body>
  
  <div id="startScreen">
- <div id="copyright">
  <div id="flowLight"></div> 
    <img src="IMG_1244.jpeg" alt="BrainTrials Logo">
 </div>
