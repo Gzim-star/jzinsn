@@ -126,11 +126,12 @@ button:hover { background: #00000000; }
  <div id="startScreen">
   <img src="IMG_1244.jpeg" alt="BrainTrials Logo">
 </div>
-  <div id="gameContainer">
+<div id="gameContainer">
   <h1></h1>
   <button onclick="startWordChain()">  START  </button>
-</div>
-  <!-- Tip Button -->
+  </div>
+
+<!-- Tip Button -->
 <button id="tipButton">❕</button>
 
 <!-- Modal für die Tipps -->
@@ -148,7 +149,21 @@ button:hover { background: #00000000; }
 const tipButton = document.getElementById('tipButton');
 const tipModal = document.getElementById('tipModal');
 const closeBtn = document.querySelector('.close');
-
+const hint = document.createElement('div');
+hint.textContent = "Welcome";
+hint.style.position = 'absolute';
+hint.style.top = '10%';
+hint.style.left = '50%';
+hint.style.transform = 'translateX(-50%)';
+hint.style.fontFamily = "'Press Start 2P', cursive";
+hint.style.fontSize = '2em';
+hint.style.color = 'white';
+hint.style.opacity = '0';
+hint.style.transition = 'opacity 0.5s';
+  setTimeout(() => {
+    hint.style.opacity = '1';
+  }, 5000);
+};
 tipButton.onclick = () => {
   // 🔁 öffnen / schließen
   tipModal.classList.toggle('open');
