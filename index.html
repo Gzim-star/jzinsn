@@ -203,17 +203,12 @@ function showStartWelcomeHint() {
 }
 startScreen.onclick = () => {
   startScreen.style.display = 'none';
-
-  // Start-Button zeigen
   startButton.style.display = 'block';
-
-  // Welcome-Hint nach 5 Sekunden
   setTimeout(showStartWelcomeHint, 5000);
 };
   
-  // ⏱ Welcome-Hint nach 5 Sekunden
-  setTimeout(showStartWelcomeHint, 5000);
-};
+ 
+
   
     // ========================== TIP BUTTON LOGIC ==========================
 const tipButton = document.getElementById('tipButton');
@@ -223,11 +218,7 @@ const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startButton');
 const welcomeHint = document.getElementById('welcomeHint');
 
-startScreen.onclick = () => {
-  startScreen.style.display = 'none';
 
-  // Start-Button zeigen
-  startButton.style.display = 'block';
 
 
 tipButton.onclick = () => {
