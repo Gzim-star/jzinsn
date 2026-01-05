@@ -164,7 +164,7 @@ button:hover { background: #00000000; }
   "></div>
   <img src="IMG_1244.jpeg" alt="BrainTrials Logo">
 </div>
-  <div id="gameContainer"style="display:none;"
+  <div id="gameContainer" style="opacity:0; pointer-events:none;">
   <h1></h1>
   <button onclick="startWordChain()">  START  </button>
 </div>
@@ -189,6 +189,10 @@ const closeBtn = document.querySelector('.close');
 const stratSreen = document.getElementById('startScreen').onclick = () => {
 const stratSreen = document.getElementById('startScreen').style.display = 'none';
 const gameContainer = document.getElementById('gameContainer').style.display = 'flex';
+startScreen.onclick = () => {
+  startScreen.style.display = 'none';
+  gameContainer.style.opacity = '1';
+  gameContainer.style.pointerEvents = 'auto';
 };
 tipButton.onclick = () => {
   // 🔁 öffnen / schließen
