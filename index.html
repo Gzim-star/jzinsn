@@ -140,7 +140,8 @@ button:hover { background: #00000000; }
 <body>
   
  <div id="startScreen">
-  <!-- Schatz versteckt -->
+ <div id="gameContainer" style="display:none;"></div> 
+   <!-- Schatz versteckt -->
 <div id="treasure" title="Click me!" style="
     position: absolute;
     top: 46.1%;
@@ -174,7 +175,8 @@ button:hover { background: #00000000; }
   <script>
   document.getElementById('startScreen').onclick = () => {
   document.getElementById('startScreen').style.display = 'none';
-};
+  document.getElementById('gameContainer').style.display = 'flex';
+  };
     // ========================== TIP BUTTON LOGIC ==========================
 const tipButton = document.getElementById('tipButton');
 const tipModal = document.getElementById('tipModal');
