@@ -143,8 +143,8 @@ button:hover { background: #00000000; }
 <div id="treasure" title="Click me!" style="
     position: absolute;
     top: 50%;
-    left: 56%;
-    transform: translate(-50%, -48%);
+    left: 55%;
+    transform: translate(-50%, -50%);
     width: 25px;
     height: 25px;
     border-radius: 50%;
@@ -770,7 +770,7 @@ treasure.onclick = (e) => {
   msg.style.transition = 'opacity 15s';
   document.body.appendChild(msg);
   setTimeout(() => msg.style.opacity = '1', 50);
-  setTimeout(() => msg.remove(), 5000);
+  setTimeout(() => msg.remove(), 8000);
 
   // Schatz verschwinden
   treasure.style.display = 'none';
