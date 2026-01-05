@@ -783,13 +783,42 @@ treasure.onclick = (e) => {
   // Schatz verschwinden
   treasure.style.display = 'none';
 };
-setTimeout(() => {
+let startButtonTimerDone = false; // merkt, ob die 9 Sekunden schon abgelaufen sind
+
+window.onload = () => {
   const btn = document.getElementById('startButton');
-  if (btn) {
-    btn.style.visibility = 'visible';
+  btn.style.opacity = '0';
+  btn.style.pointerEvents = 'none';
+
+  // Timer nur einmal beim Laden
+  setTimeout(() => {
     btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+    startButtonTimerDone = true;
+  }, 9000);
+};
+
+// Klick auf Startscreen oder goldenen Punkt
+function handleStartScreenClick() {
+  const startScreen = document.getElementById('startScreen');
+  const btn = document.getElementById('startButton');
+
+  startScreen.style.display = 'none';
+
+  // Nur zeigen, wenn Timer noch nicht abgelaufen
+  if (!startButtonTimerDone) {
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+    startButtonTimerDone = true;
   }
-}, 9000);
+}
+
+document.getElementById('startScreen').onclick = handleStartScreenClick;
+document.getElementById('treasure').onclick = (e) => {
+  e.stopPropagation(); // Klick nicht doppelt zählen
+  e.currentTarget.style.display = 'none';
+  handleStartScreenClick();
+};
 </script>
 </body>
 </html>
