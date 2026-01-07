@@ -97,7 +97,10 @@ button:hover { background: #00000000; }
   margin-top: 10px;
   color: white;
   font-family: 'Press Start 2P', cursive; }
-#level { margin-top:10px; color:white; font-size: 0.7em;
+#level span {
+  display: none;
+}
+  #level { margin-top:10px; color:white; font-size: 0.7em;
   font-family: 'Press Start 2P', cursive; }
 
 /* ✅ Dropdown (select) innerhalb von #level ebenfalls anpassen */
@@ -478,7 +481,7 @@ function startTicTacToe(){
     <div id="message"></div>
     <div id="scoreboard">Player: 0 | AI: 0 | Draws: 0</div>
     <div id="level">
-      Level: 
+     <span>Level:</span> 
       <select id="levelSelect">
         <option value="easy">Easy</option>
         <option value="medium" selected>Medium</option>
