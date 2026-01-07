@@ -100,7 +100,18 @@ button:hover { background: #00000000; }
 #level { margin-top:10px; color:white; font-size: 0.7em;
   font-family: 'Press Start 2P', cursive; }
 
-#grid { display: grid; grid-template-columns: repeat(3, 120px); grid-template-rows: repeat(3, 120px); gap: 12px; margin-top:20px; }
+/* ✅ Dropdown (select) innerhalb von #level ebenfalls anpassen */
+#level select {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7em; /* gleiche Größe wie dein #level Text */
+  color: white;     /* damit der Text sichtbar ist */
+  background: #000; /* optional, passend zum Spielhintergrund */
+  border: 1px solid #808080; /* optional, Rahmen wie Rest des Spiels */
+  border-radius: 5px; /* runde Ecken wie überall */
+  padding: 2px 5px;   /* kleine Polsterung */
+}
+  
+  #grid { display: grid; grid-template-columns: repeat(3, 120px); grid-template-rows: repeat(3, 120px); gap: 12px; margin-top:20px; }
 .tile { width: 120px; height: 120px; border-radius: 15px; cursor: pointer; transition: transform 0.15s, filter 0.15s; }
 .tile:hover { transform: scale(1.05); filter: brightness(1.15); }
 
@@ -344,7 +355,7 @@ function startWordChain(){
   <div id="wordDisplay">Apple</div>
 
   <div id="inputContainer">
-    <input type="text" id="playerWord" placeholder="Type your word here" autocomplete="off" autocapitalize="none">
+    <input type="text" id="playerWord" placeholder="Your answer" autocomplete="off" autocapitalize="none">
     <button onclick="playWord()"> Check </button>
   </div>
 
@@ -375,7 +386,7 @@ function playWord(){
   if(!word) return;
   // Mindestlänge
 if(word.length < 6){
-  showWordError("✖️Wrong!");
+  showWordError("Wrong!");
   return;
 }
 
@@ -383,16 +394,16 @@ if(word.length < 6){
   // Kein gleicher Endbuchstabe wie davor
 const lastTwo = currentWord.slice(-2).toLowerCase();
 if(word.slice(-1).toLowerCase() === lastTwo[0]){
-  showWordError("✖️Wrong!");
+  showWordError("Wrong!");
   return;
   
 }
   const lastChar=currentWord.slice(-1).toLowerCase();
   const reversed=currentWord.split("").reverse().join("").toLowerCase();
-  if(word[0].toLowerCase()!==lastChar){showWordError("✖️Wrong!");return;}
-  if(word.toLowerCase()===currentWord.toLowerCase()){showWordError("✖️Wrong!");return;}
-  if(word.toLowerCase()===reversed){showWordError("✖️Reversed!");return;}
-  if(usedWords.map(w=>w.toLowerCase()).includes(word.toLowerCase())){showWordError("✖️Already used!");return;}
+  if(word[0].toLowerCase()!==lastChar){showWordError("Wrong!");return;}
+  if(word.toLowerCase()===currentWord.toLowerCase()){showWordError("Wrong!");return;}
+  if(word.toLowerCase()===reversed){showWordError("Reversed!");return;}
+  if(usedWords.map(w=>w.toLowerCase()).includes(word.toLowerCase())){showWordError("Already used!");return;}
   usedWords.push(word); currentWord=word;
   document.getElementById('wordDisplay').textContent=``;
   input.value=''; message.textContent='';
@@ -562,7 +573,7 @@ function startMathTimer(){clearInterval(mathTimerInterval); mathTimerInterval=se
 function checkMathAnswer(){const input=document.getElementById('answer'); if(input.value==='')return; clearInterval(mathTimerInterval); let userAnswer = Number(input.value);
 let correctRounded = Number(correctAnswer.toFixed(4));
 
-if(Math.abs(userAnswer - correctRounded) < 0.0001){correctMathCount++; document.getElementById('message').textContent='☑️Correct!'; if(correctMathCount>=9){ setTimeout(startChromaticTrial,700); return;} setTimeout(()=>{mathTimer=30; generateMathTask(); startMathTimer();},700);} else{document.getElementById('message').textContent='✖️Wrong!'; correctMathCount=0; setTimeout(restartGame,1000);}}
+if(Math.abs(userAnswer - correctRounded) < 0.0001){correctMathCount++; document.getElementById('message').textContent='Correct!'; if(correctMathCount>=9){ setTimeout(startChromaticTrial,700); return;} setTimeout(()=>{mathTimer=30; generateMathTask(); startMathTimer();},700);} else{document.getElementById('message').textContent='Wrong!'; correctMathCount=0; setTimeout(restartGame,1000);}}
 
 // ========================== CHROMATIC TRIAL ==========================
 const colorsCT=["#ba68c8",
