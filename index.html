@@ -29,7 +29,6 @@ body {
   pointer-events: none;
   transition: opacity 0.6s ease;
 }
-
   #tipButton {
   position: fixed;
   bottom: 20px;
@@ -77,10 +76,10 @@ body {
 h1 { font-size: 1.8em; margin-bottom: 20px; color: #808080; font-family: 'Press Start 2P', cursive; }
 #task, #wordDisplay { font-size: 1.4em; margin: 20px 0; min-height: 50px; font-family: 'Press Start 2P', cursive; word-break: keep-all; }
 #inputContainer { display: flex; flex-direction: column; align-items: center; }
-#playerWord, #answer { width: 80%; max-width: 400px; font-size: 1em; padding: 10px; border-radius: 10px; border: none; margin-bottom: 15px; text-align: center; box-sizingss: border-box; font-family: 'Press Start 2P', cursive; }
-button { padding: 12px 25px; font-size: 1em; border: none; border-radius: 10px; background: #808080; color: white; cursor: pointer; transition: all 0.2s; font-family: 'Press Start 2P', cursive; }
+#playerWord, #answer { width: 80%; max-width: 400px; font-size: 1em; padding: 10px; border-radius: 10px; border: none; margin-bottom: 15px; text-align: center; box-sizingss: border-box; }
+button { padding: 12px 25px; font-size: 1em; border: none; border-radius: 10px; background: #808080; color: white; cursor: pointer; transition: all 0.2s; }
 button:hover { background: #00000000; }
-#message { margin-top: 20px; font-size: 1em; min-height: 40px; font-family: 'Press Start 2P', cursive; }
+#message { margin-top: 20px; font-size: 1em; min-height: 40px; }
 #timer { margin-top: 15px; font-size: 1em; font-weight: bold; }
 .timer-green { color: #4caf50; }
 .timer-yellow { color: #ffc107; }
@@ -91,8 +90,7 @@ button:hover { background: #00000000; }
 #board { display: grid; grid-template-columns: repeat(3, 120px); grid-template-rows: repeat(3, 120px); gap: 10px; margin-top:20px; }
 .cell { width:120px; height:120px; display:flex; align-items:center; justify-content:center; font-size: 40px; cursor:pointer; transition: transform 0.15s, filter 0.15s; color:white; font-weight:bold; border-radius:15px; }
 .cell:hover { transform: scale(1.05); filter: brightness(1.15); }
-#scoreboard, #level { margin-top:10px; color:white; .scoreValue {
-  font-size: 1.2em; font-family: 'Press Start 2P', cursive; }
+#scoreboard, #level { margin-top:10px; color:white; }
 
 #grid { display: grid; grid-template-columns: repeat(3, 120px); grid-template-rows: repeat(3, 120px); gap: 12px; margin-top:20px; }
 .tile { width: 120px; height: 120px; border-radius: 15px; cursor: pointer; transition: transform 0.15s, filter 0.15s; }
@@ -458,11 +456,7 @@ function startTicTacToe(){
     <div id="boardWrapper"><div id="board"></div></div>
     <div id="timer">10</div>
     <div id="message"></div>
-    <div id="scoreboard">  
-    Player: <span class="scoreValue"></span> | 
-    AI: <span class="scoreValue"></span> | 
-    Draws: <span class="scoreValue"></span>
-  </div>
+    <div id="scoreboard">Player: 0 | AI: 0 | Draws: 0</div>
     <div id="level">
       Level: 
       <select id="levelSelect">
@@ -535,13 +529,7 @@ function mediumMove(){for(let i=0;i<9;i++){if(board[i]===''){board[i]='O'; if(ch
 function hardMove(){let best=-Infinity; let move; for(let i=0;i<9;i++){if(board[i]===''){board[i]='O'; let s=minimax(board,0,false); board[i]=''; if(s>best){best=s; move=i;}}} return move;}
 function minimax(b,d,max){if(checkWinner('O')) return 10-d; if(checkWinner('X')) return d-10; if(b.every(c=>c!=='')) return 0; if(max){let best=-Infinity; for(let i=0;i<9;i++){if(b[i]===''){b[i]='O'; best=Math.max(best,minimax(b,d+1,false)); b[i]='';}} return best;} else{let best=Infinity; for(let i=0;i<9;i++){if(b[i]===''){b[i]='X'; best=Math.min(best,minimax(b,d+1,true)); b[i]='';}} return best;}}
 function checkWinner(p){const w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; return w.some(x=>x.every(i=>board[i]===p));}
-function updateScore(){
-  document.getElementById('scoreboard').innerHTML = `
-    Player: <span class="scoreValue">${ticScore.player}</span> |
-    AI: <span class="scoreValue">${ticScore.ai}</span> |
-    Draws: <span class="scoreValue">${ticScore.draw}</span>
-  `;
-}
+function updateScore(){document.getElementById('scoreboard').textContent=`Player: ${ticScore.player} | AI: ${ticScore.ai} | Draws: ${ticScore.draw}`;}
 
 // ========================== MATH CHALLENGE ==========================
 function startMathChallenge(){
