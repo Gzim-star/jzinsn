@@ -60,17 +60,29 @@ body {
 
 /* Dreh-Animation */
 #tipButton.roll .cube-face {
-  animation: cubeRoll 7s ease-in-out forwards;
+  animation: cubeRoll 1.4s ease-in-out forwards;
 }
 @keyframes cubeRoll {
   0% {
     animation: roll(0deg) roll(0deg);
+    opacity: 0;
   }
+  
+  25% {
+    animation: roll(-20deg) roll(90deg);
+    opacity: 1;
+  }
+  
   50% {
-    animation: roll(90deg) roll(90deg);
+    animation: roll(-40deg) roll(180deg);
   }
+  
+  75% {
+    animation: roll(-60deg) rotate(270deg);
+  }
+  
   100% {
-    animation: roll(180deg) roll(180deg);
+    animation: roll(-80deg) roll(360deg);
   }
 }
 #tipButton:hover { color: #00000000; }
