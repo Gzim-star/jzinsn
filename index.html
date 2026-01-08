@@ -215,7 +215,7 @@ button:hover { background: #00000000; }
     <p></p>
   </div>
 </div>
-  <script>
+ <script>
   document.getElementById('startScreen').onclick = () => {
   document.getElementById('startScreen').style.display = 'none';
 };
@@ -223,7 +223,23 @@ button:hover { background: #00000000; }
 const tipButton = document.getElementById('tipButton');
 const tipModal = document.getElementById('tipModal');
 const closeBtn = document.querySelector('.close');
+const tipButton = document.getElementById('tipButton');
 
+// Start: Quadrat von rechts
+setTimeout(() => {
+  tipButton.classList.add('show');
+}, 500);
+
+// Verwandlung ◽ → !
+setTimeout(() => {
+  tipButton.style.transform = 'scale(1.2)';
+  tipButton.textContent = '❕';
+}, 1600);
+
+// kleine Beruhigung
+setTimeout(() => {
+  tipButton.style.transform = 'scale(1)';
+}, 2000);
 tipButton.onclick = () => {
   // 🔁 öffnen / schließen
   tipModal.classList.toggle('open');
@@ -832,24 +848,6 @@ setTimeout(() => {
   btn.style.pointerEvents = 'auto';
   }
 }, 90000);
-
-const tipButton = document.getElementById('tipButton');
-
-// Start: Quadrat von rechts
-setTimeout(() => {
-  tipButton.classList.add('show');
-}, 500);
-
-// Verwandlung ◽ → !
-setTimeout(() => {
-  tipButton.style.transform = 'scale(1.2)';
-  tipButton.textContent = '❕';
-}, 1600);
-
-// kleine Beruhigung
-setTimeout(() => {
-  tipButton.style.transform = 'scale(1)';
-}, 2000);  
 
 </script>
 </body>
