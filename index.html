@@ -216,45 +216,28 @@ button:hover { background: #00000000; }
 };
     // ========================== TIP BUTTON LOGIC =========================
 const tipButton = document.getElementById('tipButton');
-const cube = document.getElementById('cube');
+const cubeFace = tipButton.querySelector('.cube-face');
 
 // reinschieben
 setTimeout(() => {
   tipButton.classList.add('show');
 }, 500);
 
-// 🎲 WÜRFEL-ROLLEN (ECHT)
+// 🎲 Würfel-Illusion (Frame-Wechsel)
 setTimeout(() => {
   const frames = ['◽', '◻', '◼', '◻', '◽'];
   let i = 0;
 
   const roll = setInterval(() => {
-    cube.textContent = frames[i];
+    cubeFace.textContent = frames[i];
     i++;
 
     if (i >= frames.length) {
       clearInterval(roll);
-      cube.textContent = '❕'; // Ergebnis
+      cubeFace.textContent = '❕';
     }
   }, 120);
 }, 10000);
-const tipButton = document.getElementById('tipButton');
-const cubeFace = tipButton.querySelector('.cube-face');
-
-// von rechts reinschieben
-setTimeout(() => {
-  tipButton.classList.add('show');
-}, 500);
-
-// 🎲 Würfel rollen
-setTimeout(() => {
-  tipButton.classList.add('rollin');
-}, 10000);
-
-// Symbol während der Drehung wechseln
-setTimeout(() => {
-  cubeFace.textContent = '❕';
-}, 1900);
 
 const tipModal = document.getElementById('tipModal');
 const closeBtn = document.querySelector('.close');
