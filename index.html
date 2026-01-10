@@ -283,10 +283,12 @@ setTimeout(() => {
 const tipModal = document.getElementById('tipModal');
 const closeBtn = document.querySelector('.close');
 
-tipButton.onclick = () => {
   tipButton.classList.remove("pulse-only");
   // 🔁 öffnen / schließen
+stopTipHelp();
 
+  tipModal.classList.toggle('open');
+  if (!tipModal.classList.contains('open')) return;
   // wenn geschlossen → nichts machen
   if (!tipModal.classList.contains('open')) return;
   let tipText = '';
