@@ -259,7 +259,10 @@ button:hover { background: #00000000; }
     // ========================== TIP BUTTON LOGIC =========================
 const tipButton = document.getElementById('tipButton');
 const cubeFace = tipButton.querySelector('.cube-face');
-
+  // ❕ beginnt nach 5 Sekunden zu pulsieren
+  setTimeout(() => {
+    tipButton.classList.add("pulse-only");
+  }, 62000);
 // TIP BUTTON erst nach 9 Sekunden erscheinen lassen
 setTimeout(() => {
   tipButton.classList.add('show'); // Button kommt rein
@@ -283,13 +286,13 @@ setTimeout(() => {
 const tipModal = document.getElementById('tipModal');
 const closeBtn = document.querySelector('.close');
 
+ tipButton.onclick = () => {
   tipButton.classList.remove("pulse-only");
+  // dein bestehender Code läuft weiter
+}; 
   // 🔁 öffnen / schließen
-stopTipHelp();
 
-  tipModal.classList.toggle('open');
-  if (!tipModal.classList.contains('open')) return;
-  // wenn geschlossen → nichts machen
+ // wenn geschlossen → nichts machen
   if (!tipModal.classList.contains('open')) return;
   let tipText = '';
   if(stage === 'start') tipText = `
