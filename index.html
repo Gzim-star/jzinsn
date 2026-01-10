@@ -31,36 +31,55 @@ body {
 
 }
   
-/* === GLASS SPLINTER EFFECT === */
+/* Glassplitter-Animation */
 .glass-button {
-  position: relative;
-  overflow: hidden;
-}
-
-.glass-fragment {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: inherit;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  transform: scale(0) rotate(0deg);
+  position: fixed;
   opacity: 0;
-  animation: glassMerge 1s forwards;
   pointer-events: none;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1em;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  background: #808080;
+  color: white;
+  cursor: pointer;
+  z-index: 500;
 }
 
-@keyframes glassMerge {
+/* Container für Splitter */
+.glass-button.shattered {
+  animation: assembleGlass 1s forwards;
+}
+
+/* Die einzelnen Splitter */
+.glass-button span {
+  display: inline-block;
+  transform: translate(0, 0) rotate(0deg);
+}
+
+/* Keyframes: Splitter kommen zusammen */
+@keyframes assembleGlass {
   0% {
-    transform: scale(0) rotate(-45deg);
     opacity: 0;
   }
-  50% {
-    transform: scale(1.2) rotate(15deg);
+  10% {
     opacity: 1;
   }
+  20% {
+    transform: translate(-50px,-50px) rotate(-45deg);
+  }
+  40% {
+    transform: translate(30px,40px) rotate(30deg);
+  }
+  60% {
+    transform: translate(-20px,20px) rotate(-15deg);
+  }
+  80% {
+    transform: translate(10px,-10px) rotate(5deg);
+  }
   100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
+    transform: translate(0,0) rotate(0deg);
   }
 }
 
@@ -908,22 +927,8 @@ setTimeout(() => {
   if (btn) {
   btn.style.opacity = '1';
   btn.style.pointerEvents = 'auto';
-      // === Glass Splitter Effekt ===
-    const fragmentsCount = 6; // Anzahl der Splitter
-    for (let i = 0; i < fragmentsCount; i++) {
-      const frag = document.createElement('div');
-      frag.className = 'glass-fragment';
-      
-      // Optional: leichte zufällige Drehung
-      const rot = Math.random() * 90 - 45; 
-      frag.style.transform = `scale(0) rotate(${rot}deg)`;
-      
-      // Animation verzögern für cooles Zusammenspiel
-      frag.style.animationDelay = `${i * 0.1}s`;
-
-      btn.appendChild(frag);   
-    }
-  }
+  // Zerbrechen-Effekt
+  btn.classList.add('shattered');
 }, 90000);
 
 </script>
