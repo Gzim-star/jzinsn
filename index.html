@@ -220,18 +220,6 @@ button:hover { background: #00000000; }
   "></div>
   <img src="IMG_1244.jpeg" alt="BrainTrials Logo">
 </div>
- <!-- Chaos-Tafel Container -->
-<div id="chaosContainer" style="
-  position: fixed;
-  inset: 0;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  gap: 5px;
-  pointer-events: none;
-  z-index: 4500; /* über Tip-Button aber unter Start-Button */
-  opacity: 1;
-"></div>
   <div id="gameContainer">
   <h1></h1>
  <button id="startButton" onclick="startWordChain()">START</button> 
@@ -859,38 +847,6 @@ treasure.onclick = (e) => {
     document.body.appendChild(spark);
     setTimeout(() => spark.remove(), 1000);
   }
-}
-  function showChaosTable(duration = 10000) {
-  const container = document.getElementById('chaosContainer');
-  const symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}<>?';
-  const totalCells = 10 * 6;
-
-  container.innerHTML = '';
-  container.style.opacity = '1';
-  container.style.pointerEvents = 'none';
-
-  for (let i = 0; i < totalCells; i++) {
-    const cell = document.createElement('div');
-    cell.style.color = 'white';
-    cell.style.fontFamily = "'Press Start 2P', cursive";
-    cell.style.fontSize = '1em';
-    cell.style.display = 'flex';
-    cell.style.alignItems = 'center';
-    cell.style.justifyContent = 'center';
-    cell.style.opacity = 0; // fade-in
-    cell.style.transition = 'opacity 0.3s';
-    cell.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-    container.appendChild(cell);
- 
-    setTimeout(() => {
-      cell.style.opacity = 1;
-    }, Math.random() * 2000);
-  }
-
-  // nach Dauer ausblenden
-  setTimeout(() => {
-    container.style.opacity = 0;
-  }, duration);
 
   // Text anzeigen
   const msg = document.createElement('div');
@@ -914,11 +870,6 @@ treasure.onclick = (e) => {
 
  
 };
-// Chaos-Tafel 10 Sekunden anzeigen
-setTimeout(() => {
-  showChaosTable(10000); // 10 Sekunden
-}, 500); // kurz nach dem Welcome-Text
-   
 setTimeout(() => {
   const btn = document.getElementById('startButton');
   if (btn) {
