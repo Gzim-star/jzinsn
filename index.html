@@ -859,15 +859,16 @@ treasure.onclick = (e) => {
     document.body.appendChild(spark);
     setTimeout(() => spark.remove(), 1000);
   }
-function showChaosTable(duration = 10000) {
+}
+  function showChaosTable(duration = 10000) {
   const container = document.getElementById('chaosContainer');
   const symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}<>?';
   const totalCells = 10 * 6;
-
+}
   container.innerHTML = '';
   container.style.opacity = '1';
   container.style.pointerEvents = 'none';
-
+}
   for (let i = 0; i < totalCells; i++) {
     const cell = document.createElement('div');
     cell.style.color = 'white';
@@ -880,7 +881,7 @@ function showChaosTable(duration = 10000) {
     cell.style.transition = 'opacity 0.3s';
     cell.textContent = symbols[Math.floor(Math.random() * symbols.length)];
     container.appendChild(cell);
-
+ }
     setTimeout(() => {
       cell.style.opacity = 1;
     }, Math.random() * 2000);
