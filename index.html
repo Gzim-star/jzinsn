@@ -473,8 +473,8 @@ if(word.length < 6){
 
 
   // Kein gleicher Endbuchstabe wie davor
-const lastSix = currentWord.slice(-6).toLowerCase();
-if(word.slice(-1).toLowerCase() === lastSix[0]){
+const lastTen = currentWord.slice(-10).toLowerCase();
+if(word.slice(-1).toLowerCase() === lastTen[0]){
   showWordError("Wrong");
   return;
   
