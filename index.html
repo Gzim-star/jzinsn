@@ -461,16 +461,24 @@ function startWordChain(){
 }
   
 function playWord(){
-  const input=document.getElementById('playerWord');
-  let word=input.value.trim(); word=word.charAt(0).toUpperCase()+word.slice(1);
-  const message=document.getElementById('message');
+  const input = document.getElementById('playerWord');
+  let word = input.value.trim();
+
   if(!word) return;
-    // <-- HIER direkt nach dem Trim einfügen:
-  // ❌ Nur Buchstaben erlaubt
-  if (!/^[a-zA-Z]+$/.test(word)) {
+
+  // ❌ Nur Buchstaben erlaubt – komplette WordChain magisch
+  // Keine Zahlen, Sonderzeichen, Leerzeichen
+  if (/[^a-zA-Z]/.test(word)) {
     showWordError("Wrong");
     return;
-}
+  }
+
+  // ✅ Normalisierung: erster Buchstabe groß, Rest klein
+  word = word.charAt(0).toUpperCase() + word.slice(1);
+
+  const message = document.getElementById('message');
+
+
   
   // Mindestlänge
 if(word.length < 6){
