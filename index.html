@@ -198,14 +198,31 @@ button:hover { background: #00000000; }
   animation: none;
   pointer-events: none;
 }
-.system-reset {
-  animation: softFade 0.25s ease-out;
+.system-blink {
+  animation: systemBlink 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes softFade {
-  0%   { opacity: 1; }
-  50%  { opacity: 0.85; }
-  100% { opacity: 1; }
+@keyframes systemBlink {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+  }
+  35% {
+    opacity: 0.6;
+    filter: blur(1.2px);
+    transform: scale(0.992);
+  }
+  65% {
+    opacity: 0.85;
+    filter: blur(0.6px);
+    transform: scale(0.996);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+  }
 }
 </style>
 </head>
@@ -617,10 +634,10 @@ function triggerWordChainAlarmReset(delay = 800){
   if(stage !== 'word') return; // Nur in WordChain
 
   // 🔴 Alarm-Impuls
-  document.body.classList.add('system-reset');
+  document.body.classList.add('system-blink');
 
   setTimeout(() => {
-    document.body.classList.remove('system-reset');
+    document.body.classList.remove('system-blink');
   }, 600); // Dauer des Alarm-Impulses
 
   // 🔁 Reset nach kurzer Verzögerung
