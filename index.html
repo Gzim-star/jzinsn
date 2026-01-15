@@ -466,37 +466,17 @@ function playWord(){
   let word=input.value.trim(); word=word.charAt(0).toUpperCase()+word.slice(1);
   const message=document.getElementById('message');
   if(!word) return;
-    // Prüfe nur Buchstaben
-    if(!/^[a-zA-Z]+$/.test(word)) {
-        wrongAttempt(); return;
-    }
-
-    // Mindestlänge
-    if(word.length < 6) { wrongAttempt(); return; }
-
-    // Startbuchstabe
-    const lastChar = currentWord.slice(-1).toLowerCase();
-    if(word[0].toLowerCase() !== lastChar) { wrongAttempt(); return; }
-
-    // Schon benutzt
-    if(usedWords.map(w => w.toLowerCase()).includes(word.toLowerCase())) { wrongAttempt("Already used"); return; }
-
-    // Reverse blockieren
-    const reversed = currentWord.split("").reverse().join("").toLowerCase();
-    const blockedBase = reversed.slice(0, -1);
-    if(word.toLowerCase().startsWith(blockedBase) && word.length > blockedBase.length) { wrongAttempt(); return; }
-
-    // WordList Check (nur erlaubte Wörter)
-    if(!wordList.map(w => w.toLowerCase()).includes(word.toLowerCase())) { wrongAttempt(); return; }
-
-    // ✅ Alles korrekt → Reset falsche Versuche
-    wrongAttempts = 0;
-
-    usedWords.push(word);
-    currentWord = word;
-    document.getElementById('wordDisplay').textContent = '';
-    input.value = '';
-    setTimeout(aiTurn, 500);
+    // <-- HIER direkt nach dem Trim einfügen:
+  // ❌ Nur Buchstaben erlaubt
+  if (!/^[a-zA-Z]+$/.test(word)) {
+    showWordError("Wrong");
+    return;
+}
+  
+  // Mindestlänge
+if(word.length < 6){
+  showWordError("Wrong");
+  return;
 }
 
 // 2️⃣ Wiederholungs-Start
@@ -602,6 +582,14 @@ if(possible.length === 0){
     setTimeout(startTicTacToe, 500);
   }
 }
+function wrongAttempt(msg = "Wrong") {
+  showWordError(msg);
+  wrongAttempts++;
+
+  if(wrongAttempts >= 4){
+    setTimeout(restartGame, 800);
+  }
+}
 
 function showWordChainHint() {
   const hint = document.getElementById('wordHint');
@@ -613,16 +601,6 @@ function showWordChainHint() {
     hint.style.opacity = "0";
   }, 3000);
 }
-function wrongAttempt(msg = "Wrong") {
-    showWordError(msg);
-    wrongAttempts++;
-
-    if(wrongAttempts >= 4) {
-        // 4 falsche Versuche → Reset
-        setTimeout(restartGame, 800); // kleines Delay, damit Spieler das Wrong sieht
-    }
-}
-    
 // ========================== TIC TAC TOE ==========================
 function startTicTacToe(){
   stage='tic';
@@ -898,7 +876,7 @@ function restartGame(){
   clearInterval(chromaticTimerInterval);
   clearInterval(mathTimerInterval);
   clearTimeout(uniformTimeout);
-
+  wrongAttempts = 0; // 🔑 WICHTIG
   // Variablen zurücksetzen
   stage = 'start';
   wordScore = 0;
