@@ -198,27 +198,6 @@ button:hover { background: #00000000; }
   animation: none;
   pointer-events: none;
 }
-.system-retreat {
-  animation: systemRetreat 0.28s ease-in-out;
-}
-
-@keyframes systemRetreat {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-    filter: blur(0px);
-  }
-  45% {
-    transform: scale(0.96);
-    opacity: 0.25;
-    filter: blur(1.5px);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-    filter: blur(0px);
-  }
-}
 </style>
 </head>
 <body>
@@ -548,7 +527,6 @@ if (
   showWordError("Wrong");
   return;
 }
-  
   if(word[0].toLowerCase()!==lastChar){showWordError("Wrong");return;}
   if(word.toLowerCase()===currentWord.toLowerCase()){showWordError("Wrong");return;}
   
@@ -620,27 +598,10 @@ function wrongAttempt(msg = "Wrong") {
   showWordError(msg);
   wrongAttempts++;
 
-  if(wrongAttempts >= 1){ // nach 4 Versuchen
-    triggerWordChainAlarmReset(3000);
-    return;
+  if(wrongAttempts >= 4){
+    setTimeout(restartGame, 800);
   }
-}
-function systemRetreatBlink() {
-  const container = document.getElementById('gameContainer');
-  if (!container) return;
-
-  container.classList.add('system-retreat');
-
-  setTimeout(() => {
-    container.classList.remove('system-retreat');
-  }, 300);
-}
-
-  // 🔁 Reset nach kurzer Verzögerung
-  setTimeout(() => {
-    restartGame();
-  }, delay);
-}
+}    
 // ========================== TIC TAC TOE ==========================
 function startTicTacToe(){
   stage='tic';
