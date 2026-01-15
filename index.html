@@ -466,7 +466,7 @@ function playWord(){
   const message=document.getElementById('message');
   if(!word) return;
   // Mindestlänge
-if(word.length < 10){
+if(word.length < 6){
   showWordError("Wrong");
   return;
 }
