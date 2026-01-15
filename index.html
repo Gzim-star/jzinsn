@@ -198,16 +198,14 @@ button:hover { background: #00000000; }
   animation: none;
   pointer-events: none;
 }
-/* 🔴 Alarm-Impuls */
-.alarm {
-  animation: alarmFlash 1s ease-in-out;
+.system-reset {
+  animation: softFade 0.25s ease-out;
 }
 
-@keyframes alarmFlash {
-  0%   { background: black; }
-  30%  { background: white; } /* dunkles Rot */
-  60%  { background: black; } /* Alarm */
-  100% { background: black; }
+@keyframes softFade {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.85; }
+  100% { opacity: 1; }
 }
 </style>
 </head>
@@ -619,10 +617,10 @@ function triggerWordChainAlarmReset(delay = 800){
   if(stage !== 'word') return; // Nur in WordChain
 
   // 🔴 Alarm-Impuls
-  document.body.classList.add('alarm');
+  document.body.classList.add('system-reset');
 
   setTimeout(() => {
-    document.body.classList.remove('alarm');
+    document.body.classList.remove('system-reset');
   }, 600); // Dauer des Alarm-Impulses
 
   // 🔁 Reset nach kurzer Verzögerung
