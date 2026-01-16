@@ -953,7 +953,7 @@ function startTreasureWatcher() {
     const startScreen = document.getElementById('startScreen');
     if (!startScreen || startScreen.style.display === 'none') return;
 
-    if (Date.now() - treasureLastActive >= 60000) { // 60 Sekunden
+    if (Date.now() - treasureLastActive >= 10000) { // 60 Sekunden
       stopTreasureWatcher();
       restartGame(); // 👉 zurück zum Flow-Bild
     }
