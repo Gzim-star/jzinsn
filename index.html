@@ -417,9 +417,6 @@ let mathTimer=30, mathTimerInterval;
 let lastPlayerClick = 0; // Zeit des letzten Klicks
 const clickCooldown = 300; // 300 ms zwischen erlaubten Klicks
 let wrongAttempts = 0; // ✅ RICHTIG PLATZIERT
-
-let inactivityTimeout = null;
-
 function showWordError(text) {
   const message = document.getElementById('message');
   if (!message) return;
@@ -993,17 +990,6 @@ setTimeout(() => {
   }
 }, 90000);
 
-function scheduleInactivityReset() {
-  clearTimeout(inactivityTimeout);
-
-  inactivityTimeout = setTimeout(() => {
-    restartGame(); // 🔁 Flow-Bild / Start-Zustand
-  }, 10000); // 60 Sekunden
-}
-['mousedown', 'keydown', 'touchstart'].forEach(evt => {
-  window.addEventListener(evt, scheduleInactivityReset, { passive: true });
-});
-scheduleInactivityReset();
 </script>
 </body>
 </html>
