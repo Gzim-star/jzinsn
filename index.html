@@ -447,7 +447,7 @@ function startWordChain(){
   <div id="wordHint" style="
     margin-top:15px;
     font-family:'Press Start 2P', cursive;
-    font-size:0.7em;
+    font-size:0.6em;
     color:#808080;
     min-height:18px;
     opacity:0;
@@ -586,7 +586,7 @@ if(possible.length === 0){
  function showWordChainHint() {
   const hint = document.getElementById('wordHint');
   if (!hint) return; // Falls das Element noch nicht geladen ist
-  hint.textContent = "Only right words take you further";
+  hint.textContent = "Correct word allow progression";
   hint.style.opacity = "1";
 
   setTimeout(() => {
@@ -599,7 +599,7 @@ function showWordChainHint() {
   const hint = document.getElementById('wordHint');
   if (!hint) return;
 
-  hint.textContent = "Only right words take you further";
+  hint.textContent = "Correct word allow progression";
   hint.style.opacity = "1";
 
   // ⏳ nach 3 Sekunden leiser Reset
