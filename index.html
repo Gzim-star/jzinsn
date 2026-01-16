@@ -418,15 +418,15 @@ let lastPlayerClick = 0; // Zeit des letzten Klicks
 const clickCooldown = 300; // 300 ms zwischen erlaubten Klicks
 let wrongAttempts = 0; // ✅ RICHTIG PLATZIERT
 // ========================== GOLDEN POINT INAKTIVITÄT ==========================
-const GOLDEN_INACTIVITY_LIMIT = 60000; // 60 Sekunden
-let goldenInactivityTimer;
+const TREASURE_INACTIVITY_LIMIT = 60000; // 60 Sekunden
+let treasureInactivityTimer;
 
-function resetGoldenTimer() {
-  clearTimeout(goldenInactivityTimer);
-  goldenInactivityTimer = setTimeout(() => {
-    console.log("Golden Point inactive → Auto-Restart");
+function resettreasureTimer() {
+  clearTimeout(treasureInactivityTimer);
+  treasureInactivityTimer = setTimeout(() => {
+    console.log("treasure inactive → Auto-Restart");
     restartGame(); // nutzt deine bestehende Restart-Funktion
-  }, GOLDEN_INACTIVITY_LIMIT);
+  }, TREASURE_INACTIVITY_LIMIT);
 }
 
 // Hol das Goldene Element
@@ -438,7 +438,7 @@ if (treasure) {
 
   // Jede Interaktion mit dem Goldenen Punkt setzt Timer zurück
   ['mousemove', 'mousedown', 'keydown', 'touchstart'].forEach(evt => {
-    treasure.addEventListener(evt, resetGoldenTimer);
+    treasure.addEventListener(evt, resettreasureTimer);
   });
 }
 function showWordError(text) {
@@ -957,9 +957,9 @@ function showChromaticWin(){
 const treasure = document.getElementById('treasure');
 // Golden Timer
 if (treasure) {
-  resetGoldenTimer();
+  resettreasureTimer();
   ['mousemove', 'mousedown', 'keydown', 'touchstart'].forEach(evt => {
-    treasure.addEventListener(evt, resetGoldenTimer);
+    treasure.addEventListener(evt, resettreasureTimer);
   });
 }
 
