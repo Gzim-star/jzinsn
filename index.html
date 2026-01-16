@@ -255,7 +255,6 @@ button:hover { background: #00000000; }
 </video>
   <script>
   document.getElementById('startScreen').onclick = () => {
-   clearTimeout(flowInactiveTimer);// 👁 System merkt: Aktivität
   document.getElementById('startScreen').style.display = 'none';
 };
     // ========================== TIP BUTTON LOGIC =========================
@@ -418,7 +417,6 @@ let mathTimer=30, mathTimerInterval;
 let lastPlayerClick = 0; // Zeit des letzten Klicks
 const clickCooldown = 300; // 300 ms zwischen erlaubten Klicks
 let wrongAttempts = 0; // ✅ RICHTIG PLATZIERT
-let flowInactiveTimer = null;
 function showWordError(text) {
   const message = document.getElementById('message');
   if (!message) return;
@@ -429,13 +427,6 @@ function showWordError(text) {
   setTimeout(() => {
     message.textContent = "";
   }, 1200);
-}
-function startFlowWatcher(){
-  clearTimeout(flowInactiveTimer);
-
-  flowInactiveTimer = setTimeout(() => {
-    restartGame();
-  }, 10000); // 60 Sekunden
 }
 // ========================== WORD CHAIN ==========================
 function startWordChain(){
@@ -927,7 +918,7 @@ function restartGame(){
   // Flow-Bild anzeigen
   const startScreen = document.getElementById('startScreen');
   startScreen.style.display = 'flex';
-  startFlowWatcher(); 
+   
 }
 function showChromaticWin(){
   const text = document.getElementById('chromaticWinText');
@@ -935,8 +926,6 @@ function showChromaticWin(){
 
   text.style.opacity = "1";
 
-
-  
   setTimeout(() => {
     restartGame();
   }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
