@@ -920,7 +920,7 @@ function restartGame(){
   // Flow-Bild anzeigen
   const startScreen = document.getElementById('startScreen');
   startScreen.style.display = 'flex';
-  // 👑 Golden Point Inaktivitäts-Überwachung starten
+  //  Golden Point Inaktivitäts-Überwachung starten
   startTreasureWatcher(); 
 }
 function showChromaticWin(){
@@ -957,7 +957,7 @@ function startTreasureWatcher() {
       stopTreasureWatcher();
       restartGame(); // 👉 zurück zum Flow-Bild
     }
-  }, 1000);
+  }, 200);
 }
 
 // Stoppen (z. B. wenn Spiel startet)
