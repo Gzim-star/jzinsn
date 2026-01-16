@@ -417,8 +417,9 @@ let mathTimer=30, mathTimerInterval;
 let lastPlayerClick = 0; // Zeit des letzten Klicks
 const clickCooldown = 300; // 300 ms zwischen erlaubten Klicks
 let wrongAttempts = 0; // ✅ RICHTIG PLATZIERT
-let lastActivityTime = Date.now();
-let inactivityResetDone = false;
+
+let inactivityTimeout = null;
+
 function showWordError(text) {
   const message = document.getElementById('message');
   if (!message) return;
@@ -992,30 +993,17 @@ setTimeout(() => {
   }
 }, 90000);
 
-function registerActivity() {
-  lastActivityTime = Date.now();
-  inactivityResetDone = false; // 🔑 Spieler ist wieder aktiv → Reset wieder erlaubt
-}
+function scheduleInactivityReset() {
+  clearTimeout(inactivityTimeout);
 
-// Alles was Aktivität ist
-['mousedown', 'keydown', 'touchstart', 'mousemove'].forEach(evt => {
-  window.addEventListener(evt, registerActivity, { passive: true });
+  inactivityTimeout = setTimeout(() => {
+    restartGame(); // 🔁 Flow-Bild / Start-Zustand
+  }, 10000); // 60 Sekunden
+}
+['mousedown', 'keydown', 'touchstart'].forEach(evt => {
+  window.addEventListener(evt, scheduleInactivityReset, { passive: true });
 });
-function startOneTimeInactivityReset() {
-  setInterval(() => {
-    const now = Date.now();
-
-    if (
-      !inactivityResetDone &&
-      now - lastActivityTime >= 10000 // ⏳ 60 Sekunden
-    ) {
-      inactivityResetDone = true;
-      restartGame(); // 🔁 DEIN bestehender Reset
-    }
-  }, 1000); // jede Sekunde prüfen
-}
-
-startOneTimeInactivityReset();
+scheduleInactivityReset();
 </script>
 </body>
 </html>
