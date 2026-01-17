@@ -1067,9 +1067,9 @@ window.addEventListener('DOMContentLoaded', () => {
       transition: 'opacity 1s',
     });
     document.body.appendChild(msg);
-    setTimeout(() => msg.style.opacity = '1', 50);
-    setTimeout(() => msg.style.opacity = '0', 5000);
-    setTimeout(() => msg.remove(), 6000);
+    setTimeout(() => msg.style.opacity = '1', 500);
+    setTimeout(() => msg.style.opacity = '0', 50000);
+    setTimeout(() => msg.remove(), 60000);
 
     // Video starten
     welcomeVideo.style.display = 'block';
@@ -1097,7 +1097,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }, 2000);
 
       if (typeof initTipButtonTimers === 'function') initTipButtonTimers();
-    }, 6000);
+    }, 10000);
   };
 });
 
