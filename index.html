@@ -409,7 +409,7 @@ window.onclick = (e) => {
   
 // ========================== VARIABLES ==========================
 let stage='start', wordScore=0, ticScore={player:0,ai:0,draw:0};
-let currentWord='', usedWords=[], wordList=[];
+let currentWord='', usedWords=[], ;
 let board=[], gameOver=false;
 let correctAnswer=0, correctMathCount=0;
 let timer=10, timerInterval;
@@ -455,10 +455,7 @@ function startWordChain(){
   "></div>
 `;
   currentWord='Apple'; usedWords=[currentWord];
-  wordList=["Algorithm","Entropy","Hypothesis","Paradox","Labyrinth",
-  "Quantum","Syntax","Recursion","Neural","Topology",
-  "Cognition","Spectrum","Vector","Matrix","Anomaly",
-  "Threshold","Resonance","Asymmetry","Continuum","Parable"];
+
 }
   
 function playWord(){
@@ -569,7 +566,30 @@ if(possible.length === 0){
       best = w;
     }
   } // ✅ DIESE KLAMMER HAT GEFEHLT
+function aiTurn(){
+  const lastChar = currentWord.slice(-1).toLowerCase();
+  let newWord = '';
+  let attempts = 0;
 
+  // Versuche max. 100x, um gültiges Wort zu generieren
+  while(attempts < 100){
+    attempts++;
+
+    // Wortlänge zwischen 6 und 10
+    const length = Math.floor(Math.random() * 5) + 6;
+
+    // erstes Zeichen = lastChar
+    let word = lastChar;
+
+    // Rest zufällig aus a-z
+    const letters = 'abcdefghijklmnopqrstuvwxyz';
+    for(let i=1; i<length; i++){
+      word += letters.charAt(Math.floor(Math.random() * letters.length));
+    }
+
+    // Großschreibung am Anfang
+    word = word.charAt(0).toUpperCase() + word.slice(1);
+  }
   usedWords.push(best);
   currentWord = best;
   document.getElementById('wordDisplay').textContent = currentWord;
