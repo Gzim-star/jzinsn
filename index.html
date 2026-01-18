@@ -916,9 +916,9 @@ function restartGame(){
   clearInterval(chromaticTimerInterval);
   clearInterval(mathTimerInterval);
   clearTimeout(uniformTimeout);
-  
+
   wrongAttempts = 0; // 🔑 WICHTIG
-  
+
   // Variablen zurücksetzen
   stage = 'start';
   wordScore = 0;
@@ -936,25 +936,28 @@ function restartGame(){
   // Flow-Bild anzeigen
   const startScreen = document.getElementById('startScreen');
   startScreen.style.display = 'flex';
-    // 👻 GHOST ERSCHEINT ERST JETZT
-if (ghostRestartPending && !ghostVisible) {
-  showGhostRestartTreasure();
-  ghostVisible = true;
+
+  // 👻 GHOST ERSCHEINT NUN UND WARTET AUF KLICK
+  if (ghostRestartPending && !ghostVisible) {
+    showGhostRestartTreasure();
+    ghostVisible = true;
   }
 }
+
 function showGhostRestartTreasure(){
   const ghost = document.getElementById('ghostRestartTreasure');
   ghost.style.display = 'block';
 
+  // Nur hier kann der Spieler auf den Ghost klicken, um Restart zu starten
   ghost.onclick = () => {
     ghost.style.display = 'none';
     ghostRestartPending = false;
     ghostVisible = false;
+
+    // ⚡ Erst jetzt das Spiel richtig starten
     restartGameHard();
   };
-}
-
- 
+} 
 
 
 function restartGameHard(){
