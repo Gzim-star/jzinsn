@@ -264,7 +264,10 @@ const tipButton = document.getElementById('tipButton');
 const cubeFace = tipButton.querySelector('.cube-face');
 
 // TIP BUTTON erst nach 9 Sekunden erscheinen lassen
-if (!gameReady) return; // 🔒 noch nicht starten
+if (!gameReady) {
+    gameReady = true;
+    startIntroTimers();
+ 
 setTimeout(() => {
   tipButton.classList.add('show'); // Button kommt rein
 
@@ -433,7 +436,7 @@ function showWordError(text) {
 }
 // ========================== WORD CHAIN ==========================
 function startWordChain(){
-  if (!gameReady) return; // 🔒 Blockiert Start
+  
   stage='word';
   const container=document.getElementById('gameContainer');
   container.innerHTML=`
@@ -949,9 +952,9 @@ function showChromaticWin(){
 const treasure = document.getElementById('treasure');
 
 treasure.onclick = (e) => {
-  if (!gameReady) {
+  if (!gameReady) 
     gameReady = true;
-    startIntroTimers();
+    startIntroTimers();}
  
   // Funken erzeugen
   for(let i=0; i<5; i++){
@@ -1003,9 +1006,9 @@ setTimeout(() => {
  
 };
 setTimeout(() => {
-  if (!gameReady) {
+  if (!gameReady) 
     gameReady = true;
-    startIntroTimers();
+    startIntroTimers();}
 
   const btn = document.getElementById('startButton');
   if (btn) {
