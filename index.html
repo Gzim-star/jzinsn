@@ -1059,9 +1059,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 6000); // Dauer Video
   }
 
-  // ========================== 3️⃣ Klick auf Flow-Bild oder Goldpunkt ==========================
-  startScreen.querySelector('img').onclick = startOnClick;
-  treasure.onclick = startOnClick;
+                             // 3️⃣ Klick auf Goldpunkt → Welcome-Text + Video
+treasure.onclick = startOnClick;
+
+                             // 3️⃣ Klick auf Flow-Bild → nur StartScreen ausblenden (kein Video, kein Welcome-Text)
+startScreen.querySelector('img').onclick = () => {
+  startScreen.style.display = 'none';
+};
 
   // ========================== 4️⃣ Optionale Funktion zum späteren TipButton-Timer ==========================
   // Damit deine originalen 30s/90s Timers nach Klick wieder normal laufen
