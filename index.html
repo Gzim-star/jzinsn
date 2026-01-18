@@ -946,13 +946,22 @@ function restartGame(){
   const startScreen = document.getElementById('startScreen');
   startScreen.style.display = 'flex';
     // 👻 GHOST ERSCHEINT ERST JETZT
-  if (ghostRestartPending) {
-    showGhostRestartTreasure();
-    ghostRestartPending = false;
+if (ghostRestartPending && !ghostVisible) {
+  showGhostRestartTreasure();
+  ghostVisible = true;
   }
 }
 function showGhostRestartTreasure(){
-  let ghost = document.getElementById('ghostRestartTreasure');
+  const ghost = document.getElementById('ghostRestartTreasure');
+  ghost.style.display = 'block';
+
+  ghost.onclick = () => {
+    ghost.style.display = 'none';
+    ghostRestartPending = false;
+    ghostVisible = false;
+    restartGameHard();
+  };
+}
 
   if (!ghost) {
     ghost = document.createElement('div');
@@ -1085,8 +1094,7 @@ function startUISequence() {
     }
   }, 90000);
 }
-function triggerGhostRestart() {
-  const ghost = document.getElementById('ghostRestartTreasure');
+
 
   // Zeige kurz die Animation, dass ein Restart passiert
   ghost.style.display = 'block';
