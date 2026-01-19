@@ -970,16 +970,6 @@ function restartGameHard(){
     <button id="startButton" onclick="startWordChain()">START</button>
   `;
 
-  // UI neu starten
-  startUISequence();
-}
- ghost.onclick = () => {
-  ghost.style.display = 'none';
-  ghostRestartPending = false;
-  ghostVisible = false;
-
-  startWordChain(); // 🔥 DIREKT
-}
 
 
 
