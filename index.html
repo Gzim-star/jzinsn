@@ -949,7 +949,7 @@ if (ghostRestartPending && !ghostVisible) {
   startUISequence();
  }
 }
- function showChromaticWin(){
+function showChromaticWin() {
   const text = document.getElementById('chromaticWinText');
   if(!text) return;
 
@@ -957,6 +957,9 @@ if (ghostRestartPending && !ghostVisible) {
 
   setTimeout(() => {
     restartGame();
+    // 🔑 UI-Sequenz wieder erlauben
+    uiStarted = false;
+    startUISequence();
   }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
 }
 function globalRestartFromTreasure() {
