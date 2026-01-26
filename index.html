@@ -989,10 +989,15 @@ function initStatePuzzle(){
 
     if (state.every(v => v === 0)) {
       solved = true;
-      triggerGhostRestart();
-      setTimeout(restartGame, 1200);
-    }
-  }
+        triggerGhostRestart();
+        setTimeout(() => {
+        restartGame();
+    // 🔑 UI-Sequenz wieder erlauben
+        uiStarted = false;
+       startUISequence();
+     }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
+   }
+   
 
   render();
 }
@@ -1036,14 +1041,7 @@ function showChromaticWin() {
 text.style.opacity = "1";
  setTimeout(() => {
   startStatePuzzle();
-}, 2000);
-  triggerGhostRestart();
-  setTimeout(() => {
-    restartGame();
-    // 🔑 UI-Sequenz wieder erlauben
-    uiStarted = false;
-    startUISequence();
-  }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
+  }, 2000);
 }
 function globalRestartFromTreasure() {
   // 🔁 ZUERST: kompletten Game-State resetten
