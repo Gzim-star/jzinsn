@@ -198,60 +198,6 @@ button:hover { background: #00000000; }
   animation: none;
   pointer-events: none;
 }
-/* Wrapper */
-.game-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: opacity 1.2s ease; /* 👈 Fade */
-}
-
-.game-wrapper.hide {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Grid */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(12, min(24px, 6vw));
-  grid-template-rows: repeat(12, min(24px, 6vw));
-  gap: 3px;
-}
-
-.cell {
-  background: #777;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(12px + 0.5vmin);
-  font-weight: bold;
-  color: black;
-  user-select: none;
-}
-
-.cell.active {
-  opacity: 0.4;
-}
-
-/* Lösung Button */
-#solutionBtn {
-  margin-top: 18px;
-  padding: 12px 26px;
-  font-size: 16px;
-  background: #00000000;
-  color: black;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-/* Button */
-solutionBtn.onclick = () => {
-  alert("Klicke diese Zellen:\n" + solvePuzzle(state).join(", "));
-}
 </style>
 </head>
 <body>
@@ -468,7 +414,7 @@ window.onclick = (e) => {
 };
   
 // ========================== VARIABLES ==========================
-let stage='start', statePuzzle, wordScore=0, ticScore={player:0,ai:0,draw:0};
+let stage='start', wordScore=0, ticScore={player:0,ai:0,draw:0};
 let currentWord='', usedWords=[], wordList=[];
 let board=[], gameOver=false;
 let correctAnswer=0, correctMathCount=0;
@@ -971,119 +917,6 @@ function showChromaticMessage(){
     text.style.opacity = "0";
   }, 3000);
 }
-function startStatePuzzle(){
-  stage = 'statePuzzle';
-
-  const container = document.getElementById('gameContainer');
-  container.innerHTML = `
-    <div class="game-wrapper" id="statePuzzleWrapper">
-      <div id="grid"></div>
-    <button id="solutionBtn">Lösung anzeigen</button>
-    </div>
-  `;
-
-  initStatePuzzle();
-}
-function initStatePuzzle(){
-  const grid = document.getElementById("grid");
-  const solutionBtn = document.getElementById("solutionBtn");
-  const wrapper = document.getElementById(". game-wrapper");
-  
-  const size = 12;
-  let state = [];
-  let solved = false;
-
-
-
-  for(let i=0;i<size*size;i++){
-    state[i] = Math.random() > 0.5 ? 1 : 0;
-  }
-
-  function render(){
-    grid.innerHTML = "";
-    state.forEach((v,i)=>{
-      const cell = document.createElement("div");
-      cell.className = "cell" + (v ? " active" : "");
-      cell.onclick = ()=>{ if(!solved) toggle(i); };
-      grid.appendChild(cell);
-    });
-    checkSolved();
-  }
-
-  function toggle(i){
-    const n=[i,i-1,i+1,i-size,i+size];
-    n.forEach(x=>{
-      if(x>=0 && x<size*size && Math.abs((x%size)-(i%size))<=1){
-        state[x]^=1;
-      }
-    });
-    render();
-  }
-
-  function checkSolved(){
-    if(solved) return;
-    if(state.every(v=>v===0)){
-      solved = true;
-
-      wrapper.classList.add("hide");
-
-      setTimeout(() => {
-        wrapper.style.display = " none";
-      },1300);
-    }
-  }  
- /* Lösung berechnen (bleibt gleich) */
-function solvePuzzle(state) {
-  const n = size * size;
-  let matrix = [];
-  let vector = state.slice();
-
-  for (let i = 0; i < n; i++) {
-    matrix[i] = Array(n).fill(0);
-    matrix[i][i] = 1;
-    let r = Math.floor(i / size);
-    let c = i % size;
-    if (r > 0) matrix[i][i - size] = 1;
-    if (r < size - 1) matrix[i][i + size] = 1;
-    if (c > 0) matrix[i][i - 1] = 1;
-    if (c < size - 1) matrix[i][i + 1] = 1;
-  }
-
-  for (let i = 0; i < n; i++) {
-    if (!matrix[i][i]) {
-      for (let j = i + 1; j < n; j++) {
-        if (matrix[j][i]) {
-          [matrix[i], matrix[j]] = [matrix[j], matrix[i]];
-          [vector[i], vector[j]] = [vector[j], vector[i]];
-          break;
-        }
-      }
-    }
-    for (let j = 0; j < n; j++) {
-      if (i !== j && matrix[j][i]) {
-        for (let k = 0; k < n; k++) matrix[j][k] ^= matrix[i][k];
-        vector[j] ^= vector[i];
-      }
-    }
-  }
-
-  return vector {
-    .map((v, i) => v ? `(${Math.floor(i/size)+1},${i%size+1})` : null)
-    .filter(Boolean);
-}
-
-  triggerGhostRestart();
-      setTimeout(() => {
-       restartGame();
-        // 🔑 UI-Sequenz wieder erlauben
-        uiStarted = false;
-        startUISequence();
-      }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
-    }
-  }
-
-  render();
-}  
 function restartGame(){
   clearInterval(chromaticTimerInterval);
   clearInterval(mathTimerInterval);
@@ -1122,7 +955,13 @@ function showChromaticWin() {
   if(!text) return;
 
 text.style.opacity = "1";
- setTimeout(startStatePuzzle, 800);
+ triggerGhostRestart();
+  setTimeout(() => {
+    restartGame();
+    // 🔑 UI-Sequenz wieder erlauben
+    uiStarted = false;
+    startUISequence();
+  }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
 }
 function globalRestartFromTreasure() {
   // 🔁 ZUERST: kompletten Game-State resetten
