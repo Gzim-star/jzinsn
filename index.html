@@ -212,7 +212,7 @@ button:hover { background: #00000000; }
   font-size: calc(12px +0.5vmin);
   font-weight: bold;
   color: black;
-  user-selet: none;
+  user-select: none;
 }
 
 #statePuzzleWrapper .cell.active {
@@ -964,7 +964,7 @@ function startStatePuzzle(){
 function initStatePuzzle(){
   const grid = document.getElementById("grid");
   const solutionBtn = document.getElementById("solutionBtn")
-  const wrapper = document.guerySelector(".game-wrapper")
+  const wrapper = document.querySelector(".game-wrapper")
   
   
   const size = 12;
