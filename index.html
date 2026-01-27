@@ -1067,7 +1067,7 @@ function solvePuzzle(state) {
     }
   }
 
-  return vector{
+  return vector {
     .map((v, i) => v ? `(${Math.floor(i/size)+1},${i%size+1})` : null)
     .filter(Boolean);
 }
